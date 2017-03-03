@@ -25,7 +25,7 @@ var router = (function () {
           if (page && status === 200)
             el.innerHTML = markdown.makeHtml(page);
           else
-            el.innerHTML = markdown.makeHtml('Post not found');
+            el.innerHTML = markdown.makeHtml('Página não encontrada');
         });
     }
   }

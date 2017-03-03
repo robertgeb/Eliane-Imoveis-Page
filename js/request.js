@@ -11,7 +11,7 @@ var request = (function () {
         var oReq = new XMLHttpRequest();
         oReq.addEventListener('load', resolve);
         oReq.addEventListener('error', reject);
-        oReq.open('GET', host+'/pages/'+page);
+        oReq.open('GET', host+'/pages/'+page+'.md');
         oReq.send();
       });
     }
