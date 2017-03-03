@@ -1,4 +1,4 @@
-%list%
-![%imgName](%imgUrl)
-* %title
-  
+%loop%
+  * %title%
+
+%pages%

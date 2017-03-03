@@ -1,0 +1,17 @@
+{
+  "id": 1,
+  "descricao": "Linda casa",
+  "quartos": 2,
+  "banheiros": 1,
+  "sala": 1,
+  "garagem": 1,
+  "piscina": 1,
+  "terraco": 0,
+  "andares": 0,
+  "churrasqueira": 0,
+  "preco": 90000,
+  "tamanho": 10,
+  "tipo": "casa",
+  "objetivo": "venda",
+  "fotos": ["Quarto", "Sala", "Frente"]
+}

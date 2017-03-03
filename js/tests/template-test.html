@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+  </head>
+  <body>
+    <script src="/template.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      template.set('index',{title:['Casa', 'Terreno'], pages:'1,2,3'});
+      console.log(template.run('index', '%loop%\n        * %title%\n      %pages%'));
+    </script>
+  </body>
+</html>

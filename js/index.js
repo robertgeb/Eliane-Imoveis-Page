@@ -11,9 +11,6 @@
 // };
 // firebase.initializeApp(config);
 
-template.set('imovel', [
-  {name: 'title', value: 'Terreno baldio'}
-])
 
 window.addEventListener('hashchange', router.run);
 window.addEventListener('load', router.run);
