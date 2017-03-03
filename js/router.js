@@ -21,11 +21,10 @@ var router = (function () {
         request.page(url).then(function (e) {
           let page = e.target.response;
           let status = e.target.status;
-          
-          page = template.run(url, page);
+
 
           if (page && status === 200)
-            el.innerHTML = markdown.makeHtml(page);
+            el.innerHTML = markdown.makeHtml(template.run(url, page));
           else
             el.innerHTML = markdown.makeHtml('Página não encontrada');
         });
