@@ -12,7 +12,7 @@ var template = (function () {
     run: function (name, code) {
       var variables = templates[name];
       for (var i = 0; i < variables.length; i++) {
-        code.replace('%'+variables[i].name+'%', variable[i].value );
+        code.replace('%'+variables[i].name+'%', variables[i].value );
       }
       return code;
     }
