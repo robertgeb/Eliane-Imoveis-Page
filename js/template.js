@@ -11,9 +11,13 @@ var template = (function () {
     },
     run: function (name, code) {
       var variables = templates[name];
+      console.log(code);
+      console.log(variables);
+      console.log(name);
       for (var i = 0; i < variables.length; i++) {
-        code.replace('%'+variables[i].name+'%', variables[i].value );
+        code = code.replace('%'+variables[i].name+'%', variables[i].value);
       }
+      console.log(code);
       return code;
     }
   }
