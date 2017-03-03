@@ -21,7 +21,7 @@ var router = (function () {
         request.page(url).then(function (e) {
           let page = e.target.response;
           let status = e.target.status;
-
+          console.log(url);
           console.log(page);
           console.log(status);
           if (page && status === 200)
