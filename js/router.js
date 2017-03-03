@@ -4,25 +4,39 @@
 // Simple Router
 //
 var router = (function () {
-  var el = document.getElementById('content');
-  var markdown = new showdown.Converter();
+  var controllers = {};
 
-  markdown.setFlavor('github');
-  markdown.setOption('requireSpaceBeforeHeadingText', true);
+  function searchToObject() {
+    var pairs = window.location.search.substring(1).split("&"),
+      obj = {},
+      pair,
+      i;
+
+    for ( i in pairs ) {
+      if ( pairs[i] === "" ) continue;
+
+      pair = pairs[i].split("=");
+      obj[ decodeURIComponent( pair[0] ) ] = decodeURIComponent( pair[1] );
+    }
+
+    return obj;
+  }
 
   return {
+    set: function (path, controller) {
+      controllers[path] = controller;
+    },
     run: function () {
       var url = location.pathname.slice(1) || 'index';
 
-      request.page(url).then(function (e) {
-        let page = e.target.response;
-        let status = e.target.status;
-        
-        if (page && status === 200)
-          el.innerHTML = markdown.makeHtml(template.run(url, page));
-        else
-          el.innerHTML = markdown.makeHtml('Página não encontrada');
-      });
+      try {
+        controllers[url](searchToObject(), url);
+      } catch (e) {
+        console.log('FAIL');
+        console.log(url);
+        console.log(e);
+
+      }
     }
   }
 })()

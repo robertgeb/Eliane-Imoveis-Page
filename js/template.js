@@ -5,36 +5,45 @@
 //
 var template = (function () {
   var templates = {};
+  var element = document.getElementById('content');
+  var markdown = new showdown.Converter();
+
+  markdown.setFlavor('github');
+  markdown.setOption('requireSpaceBeforeHeadingText', true);
+
+
   return {
-    set: function (name, variables) {
-      templates[name] = variables;
+    set: function (name, template) {
+      templates[name] = template;
     },
-    run: function (name, code) {
-      var variables = templates[name];
+    run: function (name, data) {
+      var template = templates[name];
+      var finalView = '';
       var loops = [];
 
-      function setVariables(match, variable, offset, string) {
-        var value = variables[variable];
+      function setData(match, dataName, offset, string) {
+        var value = data[dataName];
         if (value)
           return value;
         else
           return '';
       }
 
-      function setLoopVariables(match, variable, offset, string){
-        var value = '';
-        function setVariable(match, variable2, offset, string) {
-          var valor2 = variables[variable2];
-          if (typeof valor2 === 'string') {
-            return valor2;
+      function setLoop(match, loop, offset, string){
+        var loopView = '';
+
+        function setLoopData(match, dataName, offset, string) {
+          var value = data[dataName];
+          if (typeof value === 'string') {
+            return value;
           }
-          else if (valor2 === undefined) {
+          else if (value === undefined) {
             return '%endloop%';
           }
           else{
-            valor2 = variables[variable2].shift();
-            if (valor2)
-              return valor2;
+            value = data[dataName].shift();
+            if (value)
+              return value;
             else
             {
               return '%endloop%';
@@ -43,18 +52,20 @@ var template = (function () {
         }
 
         while (true) {
-          var loop = variable.replace(/%(\w+)%/, setVariable);
-          if (loop.indexOf('%endloop%') > -1) {
+          var iteration = loop.replace(/%(\w+)%/, setLoopData);
+          if (iteration.indexOf('%endloop%') > -1) {
             break;
           }
-          value += loop + '\n\n';
+          loopView += iteration + '\n\n';
         }
-        return value;
+        return loopView;
       }
+      // Compiling loops
+      finalView = template.replace(/%loop%\n(\s\s.*\n)/g, setLoop);
+      // Compiling generic data
+      finalView = finalView.replace(/%(\w+)%/g, setData);
 
-      code = code.replace(/%loop%\n(\s\s.*\n)/g, setLoopVariables);
-      code = code.replace(/%(\w+)%/g, setVariables);
-      return code;
+      element.innerHTML = markdown.makeHtml(finalView);
 
     }
   }

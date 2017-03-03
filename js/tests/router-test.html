@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script src="/router.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      router.set('tests/router-test.html', function (params, url) {
+        console.log(params);
+      });
+      router.run();
+    </script>
+  </body>
+</html>
