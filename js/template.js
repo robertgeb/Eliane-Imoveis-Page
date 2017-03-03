@@ -20,6 +20,9 @@ var template = (function () {
       var template = templates[name];
       var finalView = '';
       var loops = [];
+      if (!data) {
+        return markdown.makeHtml(template);
+      }
 
       function setData(match, dataName, offset, string) {
         var value = data[dataName];
