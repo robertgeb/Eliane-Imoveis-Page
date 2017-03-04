@@ -21,7 +21,7 @@ router.set('index', function (reqParams) {
         var imoveisToShow = [];
 
         // Corrente de requisições
-        requestImovelChain = function requestImovelChain(id) {
+        var requestImovelChain = function requestImovelChain(id) {
           if (id == firstImovelId+quantidadeImoveis) {
             template.run('index', {imoveis: imoveisToShow});
             return;
