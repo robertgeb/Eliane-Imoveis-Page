@@ -11,63 +11,38 @@ var template = (function () {
   markdown.setFlavor('github');
   markdown.setOption('requireSpaceBeforeHeadingText', true);
 
+  function compileTemplate(template, content) {
+    var compiled;
+    compiled = template.replace(/%(\w+)%/g, "${content.$1?content.$1:''}");
+    return eval('`'+compiled + '`');
+  }
+
+  function compileLoop(template, contentArray) {
+    var compiled = '';
+    for (var i = 0; i < contentArray.length; i++) {
+      compiled += compileTemplate(template, contentArray[i]) + '\n\n';
+    }
+    return compiled;
+  }
+
   return {
     set: function (name, template) {
       templates[name] = template;
     },
-    run: function (name, data) {
+    run: function (name, content) {
+
       var template = templates[name];
-      var finalView = '';
+      var compiled = '';
       var loops = [];
-      if (!data) {
-        return markdown.makeHtml(template);
-      }
 
-      function setData(match, dataName, offset, string) {
-        var value = data[dataName];
-        if (value)
-          return value;
-        else
-          return '';
-      }
+      // Compilando loops
+      compiled = template.replace(/%loop\s(\w+)%(.*)%fimLoop%/, function (match, loopId, loopTemplate) {
+        return compileLoop(loopTemplate, content[loopId] || []);
+      });
+      // Compilando outros dados
+      compiled = compileTemplate(compiled, content);
 
-      function setLoop(match, loop, offset, string){
-        var loopView = '';
-
-        function setLoopData(match, dataName, offset, string) {
-          var value = data[dataName];
-          if (typeof value === 'string') {
-            return value;
-          }
-          else if (value === undefined) {
-            return '%endloop%';
-          }
-          else{
-            value = data[dataName].shift();
-            if (value)
-              return value;
-            else
-            {
-              return '%endloop%';
-            }
-          }
-        }
-
-        while (true) {
-          var iteration = loop.replace(/%(\w+)%/, setLoopData);
-          if (iteration.indexOf('%endloop%') > -1) {
-            break;
-          }
-          loopView += iteration + '\n\n';
-        }
-        return loopView;
-      }
-      // Compiling loops
-      finalView = template.replace(/%loop%\n(\s\s.*\n)/g, setLoop);
-      // Compiling generic data
-      finalView = finalView.replace(/%(\w+)%/g, setData);
-
-      element.innerHTML = markdown.makeHtml(finalView);
+      element.innerHTML = markdown.makeHtml(compiled);
       // TODO: Add customs css class
       element.className += name;
 

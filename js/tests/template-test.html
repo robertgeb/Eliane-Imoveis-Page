@@ -6,10 +6,14 @@
 
   </head>
   <body>
+    <div id="content">
+
+    </div>
+    <script src="/showdown.min.js" charset="utf-8"></script>
     <script src="/template.js" charset="utf-8"></script>
     <script type="text/javascript">
-      template.set('index','%loop%\n        * %title%\n      %pages%');
-      console.log(template.run('index', {title:['Casa', 'Terreno'], pages:'1,2,3'}));
+      template.set('index','%loop imoveis% %title% %quartos% %fimLoop% %title%');
+      console.log(template.run('index', {title: 'Dahora', ioveis: [{title:'Casa'}, {title: 'Pudim'}]}));
     </script>
   </body>
 </html>
