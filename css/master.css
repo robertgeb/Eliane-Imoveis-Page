@@ -127,6 +127,14 @@ table {
   animation: xfade 24s 0s infinite;
 }
 
+/*
+ *    Index Page
+ */
+
+.index ul > li
+{
+
+}
 
 
 @keyframes xfade{
@@ -152,6 +160,6 @@ table {
       top: -50%;
    }
    100% {
-      opacity: -70%;
+      top: -70%;
    }
 }
