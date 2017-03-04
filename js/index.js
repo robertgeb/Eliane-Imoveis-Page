@@ -38,7 +38,7 @@ router.set('index', function (reqParams) {
       }); // TODO: Handle promise reject
     else
       template.run('404');
-  }); // TODO: Handle promise reject
+  }.bind(this)); // TODO: Handle promise reject
 });
 
 router.set('imovel', function (reqParams) {
