@@ -11,7 +11,6 @@ var template = (function () {
   markdown.setFlavor('github');
   markdown.setOption('requireSpaceBeforeHeadingText', true);
 
-
   return {
     set: function (name, template) {
       templates[name] = template;
@@ -69,6 +68,8 @@ var template = (function () {
       finalView = finalView.replace(/%(\w+)%/g, setData);
 
       element.innerHTML = markdown.makeHtml(finalView);
+      // TODO: Add customs css class
+      element.className += name;
 
     }
   }

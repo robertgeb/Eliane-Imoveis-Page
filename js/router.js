@@ -35,7 +35,7 @@ var router = (function () {
         console.log('FAIL');
         console.log(url);
         console.log(e);
-
+        // TODO: Treat router erros
       }
     }
   }
