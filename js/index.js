@@ -6,12 +6,12 @@ router.set('index', function (reqParams) {
   // Baixando template
   request.template('index').then(function (requestEvent) {
 
-    let template = requestEvent.target.response;
+    let pageTemplate = requestEvent.target.response;
     let status = requestEvent.target.status;
     // Configurando template
-    template.set('index', template)
+    template.set('index', pageTemplate)
     // Requisitando dados para o template
-    if (template && status === 200)
+    if (pageTemplate && status === 200)
       request.imoveisList().then(function (requestEvent) {
 
         const quantidadeImoveis = 5;
@@ -38,19 +38,19 @@ router.set('index', function (reqParams) {
       }); // TODO: Handle promise reject
     else
       template.run('404');
-  }.bind(this)); // TODO: Handle promise reject
+  }); // TODO: Handle promise reject
 });
 
 router.set('imovel', function (reqParams) {
 
   request.template('imovel').then(function (requestEvent) {
 
-    let template = requestEvent.target.response;
+    let pageTemplate = requestEvent.target.response;
     let status = requestEvent.target.status;
 
-    if (template && status === 200){
+    if (pageTemplate && status === 200){
 
-      template.set('imovel', template);
+      template.set('imovel', pageTemplate);
       request.imovel(reqParams.id).then(function (requestEvent) {
         let imovel = requestEvent.target.response;
         let status = requestEvent.target.status;
