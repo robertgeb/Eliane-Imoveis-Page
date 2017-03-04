@@ -23,7 +23,7 @@ router.set('index', function (reqParams) {
         // Corrente de requisições
         requestImovelChain = function requestImovelChain(id) {
           if (id == firstImovelId+quantidadeImoveis) {
-            template.run('index', {imoveis: imoveisToShow);
+            template.run('index', {imoveis: imoveisToShow});
             return;
           }
           request.imovel(id).then(function (requestEvent) {
