@@ -4,40 +4,17 @@ template.set('404', 'Página não encontrada');
 
 router.set('index', function (reqParams) {
   // Baixando template
-  request.template('index').then(function (requestEvent) {
-
-    let pageTemplate = requestEvent.target.response;
-    let status = requestEvent.target.status;
+  request.template('index').then(function (pageTemplate) {
     // Configurando template
     template.set('index', pageTemplate)
     // Requisitando dados para o template
-    if (pageTemplate && status === 200)
-      request.imoveisList().then(function (requestEvent) {
+    request.imoveisList().then(function (imoveisList) {
 
-        const quantidadeImoveis = 5;
-        let imoveisList = JSON.parse(requestEvent.target.response);
-        let paginaAtual = reqParams.pag || 1;
-        var firstImovelId = (paginaAtual*10)-10;
-        var imoveisToShow = [];
+      const quantidadeImoveis = 5;
+      let paginaAtual = reqParams.pag || 1;
+      template.run('index', imoveisList.slice(paginaAtual*quantidadeImoveis-10, paginaAtual*quantidadeImoveis))
 
-        // Corrente de requisições
-        var requestImovelChain = function requestImovelChain(id) {
-          if (id == firstImovelId+quantidadeImoveis) {
-            template.run('index', {imoveis: imoveisToShow});
-            return;
-          }
-          request.imovel(id).then(function (requestEvent) {
-            let imovel = JSON.parse(requestEvent.target.response);
-            imoveisToShow.push(imovel);
-            requestNextImovel(id+1);
-          });
-        }
-
-        requestImovelChain(firstImovelId);
-
-      }); // TODO: Handle promise reject
-    else
-      template.run('404');
+    }); // TODO: Handle promise reject
   }); // TODO: Handle promise reject
 });
 
