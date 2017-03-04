@@ -108,7 +108,7 @@ table {
   position: absolute;
   width: 100%;
   top: -70%;
-  animation: xmove 6s 0s infinite;
+  animation: xmove 6s 0s infinite alternate;
 }
 
 .slideshow li:nth-child(1){
