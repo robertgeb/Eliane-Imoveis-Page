@@ -9,11 +9,11 @@ var request = (function () {
       return new Promise(function (resolve, reject) {
         var oReq = new XMLHttpRequest();
         oReq.onload = function() {
-          if (req.status == 200) {
-            resolve(req.response || '');
+          if (oReq.status == 200) {
+            resolve(oReq.response || '');
           }
           else {
-            reject(Error(req.statusText));
+            reject(Error(oReq.statusText));
           }
         };
         oReq.addEventListener('error', reject);
@@ -25,11 +25,11 @@ var request = (function () {
       return new Promise(function (resolve, reject) {
         var oReq = new XMLHttpRequest();
         oReq.onload = function() {
-          if (req.status == 200) {
-            resolve(JSON.parse(req.response) || {} );
+          if (oReq.status == 200) {
+            resolve(JSON.parse(oReq.response) || {} );
           }
           else {
-            reject(Error(req.statusText));
+            reject(Error(oReq.statusText));
           }
         };
         oReq.addEventListener('error', reject);
@@ -41,11 +41,11 @@ var request = (function () {
       return new Promise(function (resolve, reject) {
         var oReq = new XMLHttpRequest();
         oReq.onload = function() {
-          if (req.status == 200) {
-            resolve(JSON.parse(req.response) || []);
+          if (oReq.status == 200) {
+            resolve(JSON.parse(oReq.response) || []);
           }
           else {
-            reject(Error(req.statusText));
+            reject(Error(oReq.statusText));
           }
         };
         oReq.addEventListener('error', reject);
