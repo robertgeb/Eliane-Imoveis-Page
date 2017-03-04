@@ -67,18 +67,18 @@ table {
   position: absolute;
   padding: 1em;
   margin: 0 auto;
-  top: 100px;
+  top: 0;
   z-index: 10;
 }
 
 #header .title h1
 {
-  font-size: 6rem;
+  font-size: 2rem;
 }
 
 #header .title h1 small
 {
-  font-size: 0.15em;
+  font-size: 0.3em;
 }
 
 #header .title p
@@ -98,16 +98,17 @@ table {
 .slideshow li{
   position: absolute;
   width: 100%;
-  height: 400px;
+  height: 110px;
   background-position: center center;
   background-repeat: no-repeat;
   overflow: hidden;
+  opacity: 0;
 }
 
 .slideshow li img{
   position: absolute;
   width: 100%;
-  top: -70%;
+  top: -60%;
   animation: xmove 6s 0s infinite alternate;
 }
 
@@ -128,6 +129,26 @@ table {
 }
 
 /*
+ *    Content
+ */
+#content {
+  position: relative;
+  display: block;
+  top: 150px;
+  padding: 20px;
+}
+
+.loader {
+  margin: 0 auto;
+   border: 10px solid #f3f3f3; /* Light grey */
+   border-top: 10px solid #3498db; /* Blue */
+   border-radius: 50%;
+   width: 80px;
+   height: 80px;
+   animation: spin 1.2s linear infinite;
+}
+
+/*
  *    Index Page
  */
 
@@ -139,27 +160,60 @@ table {
 
 @keyframes xfade{
    0%{
-      opacity: 1;
-   }
-   10.5% {
-      opacity:1;
-   }
-   12.5%{
       opacity: 0;
    }
-   98% {
-      opacity:0;
+   12%{
+     opacity: 1;
+   }
+   25%{
+    opacity: 1;
+   }
+   37%{
+     opacity: 1;
+   }
+   50%{
+     opacity: 0;
+   }
+   75%{
+     opacity: 0;
    }
    100% {
-      opacity:1;
+      opacity: 0;
    }
 }
 
 @keyframes xmove{
    0%{
-      top: -50%;
+      top: -60%;
    }
    100% {
-      top: -70%;
+      top: -80%;
    }
 }
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media (min-width: 1024px) {
+
+}
+
+@media (min-width: 768px) {
+
+}
+
+@media (min-width: 480px) {
+
+}
+
+@media (min-width: 480px) {
+
+}
+
+
+/* Portrait */
+@media screen and (orientation:portrait) { /* Portrait styles here */ }
+/* Landscape */
+@media screen and (orientation:landscape) { /* Landscape styles here */ }

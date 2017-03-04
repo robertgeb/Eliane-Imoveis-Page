@@ -67,5 +67,9 @@ router.set('imovel', function (reqParams) {
   });// TODO: Treat promise reject
 });
 
+// TODO: contato controller
+// TODO: map
+// TODO: Buscar
+
 window.addEventListener('hashchange', router.run);
 window.addEventListener('load', router.run);
